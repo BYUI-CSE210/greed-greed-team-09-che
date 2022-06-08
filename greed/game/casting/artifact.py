@@ -1,5 +1,5 @@
-
 from game.casting.actor import Actor
+
 class Artifact(Actor):
     """An artifact in this game could be a rock or a gem
     
@@ -9,6 +9,7 @@ class Artifact(Actor):
     Attributes:
         score (int) = the score earned depending if the character is a gem or a rock
     """
+    
     def __init__(self):
         """construct a new instance of an artifact"""   
         super().__init__()
@@ -38,12 +39,3 @@ class Artifact(Actor):
         """removes the gem or rock from the screen"""
 
         self._text = ""
-#Director, after "line 62"
-    """   for artifact in artifacts:
-            if robot.get_position().equals(self.gems_object()):
-               self.gems_score()
-            
-            elif robot.get_position().equals(self.rocks_object()):
-                self.rocks_score()  
-       
-    """
