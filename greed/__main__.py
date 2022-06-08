@@ -23,8 +23,9 @@ COLS = 60
 ROWS = 40
 CAPTION = "Greed Game"
 WHITE = Color(255, 255, 255)
-DEFAULT_ARTIFACTS = 80
+DEFAULT_ARTIFACTS = 70
 GEM_ROCK = ["*", "o"]
+GEM_ROCK_VELOCITY = Point(0, 5)
 
 
 def main():
@@ -45,12 +46,12 @@ def main():
     y = int(MAX_Y - 35)
     position = Point(x, y)
 
-    robot = Actor()
-    robot.set_color(WHITE)
-    robot.set_position(position)
-    robot.set_font_size(FONT_SIZE)
-    robot.set_text("#")
-    cast.add_actor("robots", robot)
+    player = Actor()
+    player.set_color(WHITE)
+    player.set_position(position)
+    player.set_font_size(FONT_SIZE)
+    player.set_text("@")
+    cast.add_actor("players", player)
 
     #create the artifacts (gems and rocks)
     for n in range(DEFAULT_ARTIFACTS):
@@ -66,12 +67,13 @@ def main():
         b = random.randint(0, 255)
         color = Color(r, g, b)
         
-        artifact = Artifact()
-        artifact.set_text(text)
-        artifact.set_font_size(FONT_SIZE)
-        artifact.set_color(color)
-        artifact.set_position(position)
-        cast.add_actor("artifacts", artifact)
+        gem_rock = Artifact()
+        gem_rock.set_text(text)
+        gem_rock.set_font_size(FONT_SIZE)
+        gem_rock.set_color(color)
+        gem_rock.set_position(position)
+        gem_rock.set_velocity(GEM_ROCK_VELOCITY)
+        cast.add_actor("gems_rocks", gem_rock)
 
     # start the game
     keyboard_service = KeyboardService(CELL_SIZE)
