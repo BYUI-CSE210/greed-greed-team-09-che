@@ -30,6 +30,20 @@ class Artifact(Actor):
         
         self.score -= 1
 
+    def cross_score(self):    
+        """substract a five from the score
+        
+        returns: the score"""
+        
+        self.score = self.score - 5
+    
+    def diamon_score(self):
+        """add five point to the score
+        
+        returns: the score"""
+
+        self.score = self.score + 5
+
     def get_score(self):
         """gets the score of the artifact"""
 
