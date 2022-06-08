@@ -1,4 +1,6 @@
 from game.casting.actor import Actor
+from game.shared.point import Point
+import random
 
 class Artifact(Actor):
     """An artifact in this game could be a rock or a gem
@@ -17,25 +19,37 @@ class Artifact(Actor):
         self.score = int(0)
 
     def gems_score(self):
-        """add one point to the score
-        
-        returns: the score"""
+        """add one point to the score"""
 
-        self.score = self.score + 1
+        self.score = 1
 
     def rocks_score(self):    
-        """substract a point from the score
+        """substract a point from the score"""
         
-        returns: the score"""
-        
-        self.score -= 1
+        self.score = -1
 
     def get_score(self):
-        """gets the score of the artifact"""
+        """gets the score of the artifact
+        
+        returns: the score value
+        """
 
         return self.score
 
-    def vanish(self):
-        """removes the gem or rock from the screen"""
+    def relocate(self):
+        """removes the gem or rock from the screen
+        then, changes its position to a random cell at the 
+        top of the screen"""
 
+        #get the text of the artifact to use it later
+        text = self.get_text()
+        #clear the text
         self._text = ""
+        #set the new position and scale it to the cell size (25)
+        x = random.randint(1, 59)
+        y = 1
+        new_p = Point(x, y)
+        new_p = new_p.scale(25)
+        self.set_position(new_p)
+        #set the text to the original value
+        self._text = text
