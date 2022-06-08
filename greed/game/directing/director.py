@@ -5,6 +5,9 @@
 """
 
 
+from game.shared.point import Point
+
+
 class Director:
     """A person who directs the game. 
 
@@ -24,6 +27,7 @@ class Director:
         """
         self._keyboard_service = keyboard_service
         self._video_service = video_service
+        self._score = 0
 
     def start_game(self, cast):
         """Starts the game using the given cast. Runs the main game loop.
@@ -44,7 +48,10 @@ class Director:
         Args:
             cast (Cast): The cast of actors.
         """
-        pass
+        
+        robot = cast.get_first_actor("robots")
+        velocity = self._keyboard_service.get_direction()
+        robot.set_velocity(velocity) 
 
     def _do_updates(self, cast):
         """Updates the robot's position and resolves any collisions with artifacts.
@@ -52,8 +59,51 @@ class Director:
         Args:
             cast (Cast): The cast of actors.
         """
-        pass
 
+        #get the robot (actor) object
+        robot = cast.get_first_actor("robots")
+        #get the max_width and max_height of the screen
+        max_x = self._video_service.get_width()
+        max_y = self._video_service.get_height()
+        robot.move_next(max_x, max_y)
+
+        #get the banner object (actor)
+        banner = cast.get_first_actor("banners")
+        #get the artifacts into a list
+        gems_rocks = cast.get_actors("artifacts")
+
+        #with every update / update the y axis of the artifacts
+        for n in gems_rocks:
+            n.move_next(max_x, max_y)
+
+            #if the artifact's position is the same as the robot
+            #update the score
+            if robot.get_position().equals(n.get_position()):
+                    if n.get_text() == "*":
+                        n.vanish()
+                        n.gems_score()
+                        self._score = self._score + (n.get_score())
+                        banner.set_text(f"The Score: {self._score}")
+                         
+                    elif n.get_text() == "o":
+                        n.vanish()
+                        n.rocks_score()
+                        self._score = self._score + (n.get_score())
+                        banner.set_text(f"The Score: {self._score}")
+
+                    elif n.get_text() == "#":
+                        n.vanish()
+                        n.diamon_score()
+                        self._score = self._score + (n.get_score())
+                        banner.set_text(f"The Score: {self._score}")
+
+                    elif n.get_text() == "+":
+                        n.vanish()
+                        n.cross_score()
+                        self._score = self._score + (n.get_score())
+                        banner.set_text(f"The Score: {self._score}")
+        
+            
     def _do_outputs(self, cast):
         """Draws the actors on the screen.
 
@@ -64,3 +114,4 @@ class Director:
         actors = cast.get_all_actors()
         self._video_service.draw_actors(actors)
         self._video_service.flush_buffer()
+
