@@ -24,7 +24,7 @@ ROWS = 40
 CAPTION = "Greed Game"
 WHITE = Color(255, 255, 255)
 DEFAULT_ARTIFACTS = 70
-GEM_ROCK = ["*", "o"]
+GEM_ROCK = ["*", "o", "+", "#"]
 GEM_ROCK_VELOCITY = Point(0, 5)
 
 

@@ -81,6 +81,18 @@ class Director:
                     gem_rock.gems_score()
                     self._score = self._score + (gem_rock.get_score())
                     banner.set_text(f"The Score: {self._score}")
+                
+                elif gem_rock.get_text() == "+":
+                    gem_rock.relocate()
+                    gem_rock.cross_score()
+                    self._score = self._score + (gem_rock.get_score())
+                    banner.set_text(f"The Score: {self._score}")
+
+                elif gem_rock.get_text() == "#":
+                    gem_rock.relocate()
+                    gem_rock.hashtag_score()
+                    self._score = self._score + (gem_rock.get_score())
+                    banner.set_text(f"The Score: {self._score}")
 
                 elif gem_rock.get_text() == "o":
                     gem_rock.relocate()

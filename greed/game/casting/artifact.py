@@ -35,7 +35,7 @@ class Artifact(Actor):
         
         self.score = self.score - 5
     
-    def diamon_score(self):
+    def hashtag_score(self):
         """add five point to the score
         
         returns: the score"""
