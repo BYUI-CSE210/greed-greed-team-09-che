@@ -6,9 +6,9 @@
 
 class Director:
     """A person who directs the game. 
-​
+
     The responsibility of a Director is to control the sequence of play.
-​
+
     Attributes:
         _keyboard_service (KeyboardService): For getting directional input.
         _video_service (VideoService): For providing video output.
@@ -17,7 +17,7 @@ class Director:
 
     def __init__(self, keyboard_service, video_service):
         """Constructs a new Director using the specified keyboard and video services.
-​
+
         Args:
             keyboard_service (KeyboardService): An instance of KeyboardService.
             video_service (VideoService): An instance of VideoService.
@@ -28,7 +28,7 @@ class Director:
 
     def start_game(self, cast):
         """Starts the game using the given cast. Runs the main game loop.
-​
+
         Args:
             cast (Cast): The cast of actors.
         """
@@ -41,7 +41,7 @@ class Director:
 
     def _get_inputs(self, cast):
         """Gets directional input from the keyboard and applies it to the player.
-​
+
         Args:
             cast (Cast): The cast of actors.
         """
@@ -52,7 +52,7 @@ class Director:
 
     def _do_updates(self, cast):
         """Updates the player's position and resolves any collisions with artifacts.
-​
+
         Args:
             cast (Cast): The cast of actors.
         """
@@ -86,6 +86,9 @@ class Director:
                     gem_rock.relocate()
                     gem_rock.cross_score()
                     self._score = self._score + (gem_rock.get_score())
+                    #if the score is negative reset _score
+                    if self._score < 0:
+                        self._score = 0
                     banner.set_text(f"The Score: {self._score}")
 
                 elif gem_rock.get_text() == "#":

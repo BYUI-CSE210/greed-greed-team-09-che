@@ -1,4 +1,3 @@
-import os
 import random
 
 from game.casting.actor import Actor
@@ -23,7 +22,7 @@ COLS = 60
 ROWS = 40
 CAPTION = "Greed Game"
 WHITE = Color(255, 255, 255)
-DEFAULT_ARTIFACTS = 70
+DEFAULT_ARTIFACTS = 75
 GEM_ROCK = ["*", "o", "+", "#"]
 GEM_ROCK_VELOCITY = Point(0, 5)
 

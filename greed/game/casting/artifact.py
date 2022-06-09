@@ -33,14 +33,14 @@ class Artifact(Actor):
         
         returns: the score"""
         
-        self.score = self.score - 5
+        self.score = -5
     
     def hashtag_score(self):
         """add five point to the score
         
         returns: the score"""
 
-        self.score = self.score + 5
+        self.score = 5
 
     def get_score(self):
         """gets the score of the artifact
